@@ -1,34 +1,47 @@
-<script setup>
-import BootcampLogo from "./assets/svg/BootcampLogo.vue"
-import HelloWorld from './components/HelloWorld.vue'
+<script setup >
+import { ref } from "vue";
+import NotificationsList from "./components/NotificationList.vue"
+import {toast} from "./components/Toastify.js"
+
+const notifications = ref([])
+
+const showMe = () => {
+  // notifications.value = [...notifications.value, toast("hello",{
+  //   position : "top-right",
+
+  // })]
+  notifications.value = [...notifications.value, toast().success("Hello Team Apple", {
+    position : "top-left",
+    type : "warning"
+  })]
+  console.log(notifications.value)
+}
+
 </script>
 
-<template>
-	<div>
-		<BootcampLogo />
-		<br />
-		<a href="https://vitejs.dev" target="_blank">
-			<img src="/vite.svg" class="logo" alt="Vite logo" />
-		</a>
-		<a href="https://vuejs.org/" target="_blank">
-			<img src="/vue.svg" class="logo vue" alt="Vue logo" />
-		</a>
-	</div>
-	<HelloWorld msg="Vite + Vue" />
+<template>  
+  <div class="container">
+    <button @click="showMe" >Show Me !</button>
+  </div>
+  <NotificationsList :notifications="notifications" ></NotificationsList>
 </template>
 
-<style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-}
+<style lang="scss" scoped>
 
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+.container{
+  button{
+    background-color: #212121;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    &:hover{
+      background-color: #424242;
+    }
+  }
 }
 </style>
