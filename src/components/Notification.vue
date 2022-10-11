@@ -1,18 +1,20 @@
 <script setup>
 import { onMounted, ref } from "vue";
-const props = defineProps(["notification"]);
-const customClass = Object.values(props.notification.class);
 
+const props = defineProps(["notification"]);
+const emit = defineEmits(["update:id"]);
+
+const customClass = Object.values(props.notification.class);
 const isClose = ref(true);
 
 const closeHandler = () => {
-	isClose.value = false;
+	emit("update:id", props.notification.id);
 };
 
 onMounted(() => {
 	setTimeout(() => {
 		isClose.value = false;
-	}, 2000);
+	}, 10000);
 });
 </script>
 
@@ -25,7 +27,7 @@ onMounted(() => {
 				</span>
 				{{ props.notification.description }}
 			</div>
-			<button @click="closeHandler" class="notification--message__close">
+			<button class="notification--message__close" @click="closeHandler">
 				<span class="material-symbols-outlined"> close </span>
 			</button>
 		</div>

@@ -8,18 +8,25 @@ const notifications = ref([]);
 const showMe = () => {
 	notifications.value = [
 		...notifications.value,
-		toast().success("Hello Team Apple", {
+		toast().success("Success Notification", {
 			position: "top-right",
 			type: "warning",
 		}),
 	];
-	console.log(notifications.value);
+
+	// console.log(notifications.value);
+};
+
+const closeHandler = (e) => {
+	// notifications.value[0].show = false;
+	// console.log(e.target);
 };
 </script>
 
 <template>
 	<div class="container">
 		<button @click="showMe">Show Me !</button>
+		<!-- <button @click="closeHandler">close</button> -->
 	</div>
 	<NotificationsList :notifications="notifications"></NotificationsList>
 </template>
