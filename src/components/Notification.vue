@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 const props = defineProps(["notification"]);
 const customClass = Object.values(props.notification.class);
 
@@ -8,6 +8,12 @@ const isClose = ref(true);
 const closeHandler = () => {
 	isClose.value = false;
 };
+
+onMounted(() => {
+	setTimeout(() => {
+		isClose.value = false;
+	}, 2000);
+});
 </script>
 
 <template>
