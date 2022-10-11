@@ -6,10 +6,6 @@ import { toast } from "./components/Toastify.js";
 const notifications = ref([]);
 
 const showMe = () => {
-	// notifications.value = [...notifications.value, toast("hello",{
-	//   position : "top-right",
-
-	// })]
 	notifications.value = [
 		...notifications.value,
 		toast().success("Hello Team Apple", {
