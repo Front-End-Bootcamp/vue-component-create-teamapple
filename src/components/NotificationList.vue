@@ -1,5 +1,5 @@
 <script setup>
-import { onUpdated, ref } from "vue";
+import { ref } from "vue";
 
 import Notification from "./Notification.vue";
 const props = defineProps(["notifications"]);
@@ -9,16 +9,12 @@ const clickHandler = () => {
 	props.notifications.forEach((element) => {
 		if (element.id === parseInt(remove.value)) {
 			element.show = false;
-			console.log(element);
 		}
 	});
 };
 </script>
 
 <template>
-	<p style="color: white">
-		{{ remove }}
-	</p>
 	<div class="notifications" :class="props.notifications[0]?.class.position">
 		<template v-for="notification in props.notifications" :key="notification">
 			<Notification

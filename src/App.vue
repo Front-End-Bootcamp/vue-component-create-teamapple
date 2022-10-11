@@ -5,28 +5,40 @@ import { toast } from "./components/Toastify.js";
 
 const notifications = ref([]);
 
-const showMe = () => {
+const showMeSuccess = () => {
 	notifications.value = [
 		...notifications.value,
 		toast().success("Success Notification", {
 			position: "top-right",
+			type: "success",
+		}),
+	];
+};
+const showMeWarning = () => {
+	notifications.value = [
+		...notifications.value,
+		toast().warning("Success Notification", {
+			position: "top-right",
 			type: "warning",
 		}),
 	];
-
-	// console.log(notifications.value);
 };
-
-const closeHandler = (e) => {
-	// notifications.value[0].show = false;
-	// console.log(e.target);
+const showMeError = () => {
+	notifications.value = [
+		...notifications.value,
+		toast().error("Success Notification", {
+			position: "top-right",
+			type: "error",
+		}),
+	];
 };
 </script>
 
 <template>
 	<div class="container">
-		<button @click="showMe">Show Me !</button>
-		<!-- <button @click="closeHandler">close</button> -->
+		<button @click="showMeSuccess">success</button>
+		<button @click="showMeWarning">warning</button>
+		<button @click="showMeError">error</button>
 	</div>
 	<NotificationsList :notifications="notifications"></NotificationsList>
 </template>
