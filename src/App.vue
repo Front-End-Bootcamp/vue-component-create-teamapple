@@ -8,10 +8,17 @@ const notifications = ref([]);
 const clickHandler = () => {
 	notifications.value = [
 		...notifications.value,
-		toast("This is a test notification", {
+		// toast("This is a test notification", {
+		// 	position: "top-left",
+		// 	background: "#9D80B8",
+		// 	icon: "🤞",
+		// 	duration : 5000,
+		// })
+		toast().info("This is a test notification", {
 			position: "top-left",
-			background: "#9D80B8",
-			icon: "🤞",
+			icon: "👍",
+			background : "indigo",
+			duration : 5000,
 		})
 	];
 };

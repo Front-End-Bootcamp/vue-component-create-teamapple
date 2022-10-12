@@ -27,8 +27,8 @@ const startTimer = (time) => {
 onMounted(() => {
 	setTimeout(() => {
 		isClose.value = false;
-	}, 10000);
-	startTimer(10000)
+	}, props.notification.duration);
+	startTimer(props.notification.duration)
 });
 
 </script>
