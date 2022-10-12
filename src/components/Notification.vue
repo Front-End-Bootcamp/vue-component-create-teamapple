@@ -1,21 +1,37 @@
 <script setup>
 import { onMounted, ref } from "vue";
 
+const barWidth = ref(100);
+const isClose = ref(true);
+
 const props = defineProps(["notification"]);
 const emit = defineEmits(["update:id"]);
 
 const customClass = Object.values(props.notification.class);
-const isClose = ref(true);
 
 const closeHandler = () => {
 	emit("update:id", props.notification.id);
 };
 
+const startTimer = (time) => {
+		const timer = setInterval(() => {
+				barWidth.value -= 1;
+				console.log(barWidth.value);
+				if (barWidth.value === 0) {
+						clearInterval(timer);
+				}
+		}, time / 100);
+  }
+
+
 onMounted(() => {
 	setTimeout(() => {
 		isClose.value = false;
 	}, 10000);
+
+	startTimer(10000)
 });
+
 </script>
 
 <template>
@@ -30,6 +46,7 @@ onMounted(() => {
 			<button class="notification--message__close" @click="closeHandler">
 				<span class="material-symbols-outlined"> close </span>
 			</button>
+			<div class="notification--message__bar" :style="{ width: `${barWidth}%`}" ></div>
 		</div>
 	</template>
 </template>
@@ -42,6 +59,7 @@ onMounted(() => {
 }
 .notification--message {
 	display: flex;
+	position: relative;
 	align-items: center;
 	justify-content: space-between;
 	border-radius: 5px;
@@ -73,5 +91,14 @@ onMounted(() => {
 			margin-left: 5px;
 		}
 	}
+	&__bar{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        border-radius: 0px 0px 5px 5px;
+    }
 }
 </style>
