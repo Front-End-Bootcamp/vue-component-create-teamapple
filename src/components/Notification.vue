@@ -24,12 +24,10 @@ const startTimer = (time) => {
 		}, time / 100);
   }
 
-
 onMounted(() => {
 	setTimeout(() => {
 		isClose.value = false;
 	}, 10000);
-
 	startTimer(10000)
 });
 
@@ -98,8 +96,8 @@ onMounted(() => {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 3px;
-        background-color: white;
+        height: 4px;
+				background-image: linear-gradient(to left, #fefefe, #e2deee, #c9bfdd, #b29fcb, #9d80b8);
         border-radius: 0px 0px 5px 5px;
     }
 }

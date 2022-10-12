@@ -19,7 +19,7 @@ export const toast = (message = "Default Message", options = {}) => {
 			toast.class.background = background;
 			return toast;
 		},
-		error: (description = 'Error Notification !') => {
+		error: (description = 'Error Notification !',options = {}) => {
 			const { position = 'top-right', icon = "priority_high", duration = 10000 ,background = '#f44336'} = options;
 			toast.description = description;
 			toast.class.position = position;
@@ -28,7 +28,7 @@ export const toast = (message = "Default Message", options = {}) => {
 			toast.class.background = background;
 			return toast;
 		},
-		warning: (description = 'Warning Notification !') => {
+		warning: (description = 'Warning Notification !',options = {}) => {
 			const { position = 'top-right', icon = "warning", duration = 10000 ,background = '#ff9800'} = options;
 			toast.description = description;
 			toast.class.position = position;
@@ -37,7 +37,7 @@ export const toast = (message = "Default Message", options = {}) => {
 			toast.class.background = background;
 			return toast;
 		},
-		info: (description = 'Info Notification !') => {
+		info: (description = 'Info Notification !',options = {}) => {
 			const { position = 'top-right', icon = "info", duration = 10000 ,background = '#2196f3'} = options;
 			toast.description = description;
 			toast.class.position = position;

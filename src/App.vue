@@ -5,45 +5,21 @@ import { toast } from "./components/Toastify.js";
 
 const notifications = ref([]);
 
-const successHandler = () => {
+const clickHandler = () => {
 	notifications.value = [
 		...notifications.value,
-		toast().success("Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.", {
-			position: "top-right",
-			type: "success",
-		}),
-	];
-};
-const warningHandler = () => {
-	notifications.value = [
-		...notifications.value,
-		toast().warning("deneme",{
-			position:"top-left"
-		}),
-	];
-};
-const errorHandler = () => {
-	notifications.value = [
-		...notifications.value,
-		toast().error(),
-	];
-};
-
-const infoHandler = () => {
-	notifications.value = [
-		...notifications.value,
-		toast().info(),
+		toast("This is a test notification", {
+			position: "top-left",
+			background: "#9D80B8",
+			icon: "🤞",
+		})
 	];
 };
 </script>
 
 <template>
 	<div class="container">
-		<button @click="successHandler">Success</button>
-		<button @click="warningHandler">Warning</button>
-		<button @click="errorHandler">Error</button>
-		<button @click="infoHandler">Info</button>
-
+		<button @click="clickHandler">Show Notification</button>
 	</div>
 	<NotificationsList :notifications="notifications"></NotificationsList>
 </template>
