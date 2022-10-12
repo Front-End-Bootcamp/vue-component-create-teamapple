@@ -7,16 +7,17 @@ const isClose = ref(true);
 const props = defineProps(["notification"]);
 const emit = defineEmits(["update:id"]);
 
-const customClass = Object.values(props.notification.class);
+const position = props.notification.class.position;
+const backgroundColor = props.notification.class.background;
 
 const closeHandler = () => {
 	emit("update:id", props.notification.id);
+	console.log(position)
 };
 
 const startTimer = (time) => {
 		const timer = setInterval(() => {
 				barWidth.value -= 1;
-				console.log(barWidth.value);
 				if (barWidth.value === 0) {
 						clearInterval(timer);
 				}
@@ -36,7 +37,7 @@ onMounted(() => {
 
 <template>
 	<template v-if="isClose">
-		<div class="notification--message" :class="customClass">
+		<div class="notification--message" :class="position" :style="{backgroundColor : backgroundColor}" >
 			<div class="notification--message__text">
 				<span class="material-symbols-outlined">
 					{{ props.notification.icon }}
@@ -67,6 +68,7 @@ onMounted(() => {
 	margin: 8px;
 	padding: 8px 5px;
 	min-width: 150px;
+	max-width: 300px;
 	width: auto;
 	z-index: 99;
 	font-family: Arial, Helvetica, sans-serif;

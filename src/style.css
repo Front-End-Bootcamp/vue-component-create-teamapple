@@ -12,27 +12,6 @@
 	background-color: #121211;
 }
 
-
-.success {
-	background-color: #4caf50;
-}
-
-.error {
-	background-color: #f44336;
-}
-
-.warning {
-	background-color: #ff9800;
-}
-
-.info {
-	background-color: #2196f3;
-}
-
-.default {
-	background-color: #212121;
-}
-
 .top-right {
 	top: 0;
 	right: 0;
@@ -65,7 +44,7 @@
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
-	animation: bottom-center 0.3s;
+	/* animation: bottom-center 0.3s; */
 
 }
 
