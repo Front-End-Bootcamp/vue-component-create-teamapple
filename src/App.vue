@@ -6,21 +6,30 @@ import { toast } from "./components/Toastify.js";
 const notifications = ref([]);
 
 const clickHandler = () => {
-	notifications.value = [
-		...notifications.value,
-		// toast("This is a test notification", {
-		// 	position: "top-left",
-		// 	background: "#9D80B8",
-		// 	icon: "🤞",
-		// 	duration : 5000,
-		// })
-		toast().info("This is a test notification", {
-			position: "top-left",
-			icon: "👍",
-			background : "indigo",
-			duration : 5000,
-		})
-	];
+	// notifications.value = [
+	// 	...notifications.value,
+	// 	toast("This is a test notification", {
+	// 		position: "top-left",
+	// 		background: "#9D80B8",
+	// 		icon: "🤞",
+	// 		duration : 5000,
+	// 	}),
+	// 	toast().info("This is a test notification", {
+	// 		position: "top-left",
+	// 		icon: "👍",
+	// 		background : "indigo",
+	// 		duration : 5000,
+	// 	}),
+	// 	toast().error()
+	// ];
+	notifications.value.push(toast("This is a test notification", {
+		position: "top-left",
+		background: "#9D80B8",
+		barActive : true,
+		barBackground : "#cdcdcd",
+		icon: "🤞",
+		duration : 5000,
+	}));
 };
 </script>
 

@@ -9,6 +9,7 @@ const emit = defineEmits(["update:id"]);
 
 const position = props.notification.class.position;
 const backgroundColor = props.notification.class.background;
+const barBackground = props.notification.class.barBackground;
 
 const closeHandler = () => {
 	emit("update:id", props.notification.id);
@@ -40,12 +41,12 @@ onMounted(() => {
 				<span class="material-symbols-outlined">
 					{{ props.notification.icon }}
 				</span>
-				{{ props.notification.description }}
+				{{ props.notification.description }}	
 			</div>
 			<button class="notification--message__close" @click="closeHandler">
 				<span class="material-symbols-outlined"> close </span>
 			</button>
-			<div class="notification--message__bar" :style="{ width: `${barWidth}%`}" ></div>
+			<div v-if="props.notification.barActive" class="notification--message__bar" :style="{ width: `${barWidth}%` , backgroundColor : barBackground}" ></div>
 		</div>
 	</template>
 </template>
@@ -64,7 +65,7 @@ onMounted(() => {
 	border-radius: 5px;
 	color: white;
 	margin: 8px;
-	padding: 8px 5px;
+	padding: 12px 5px;
 	min-width: 150px;
 	max-width: 300px;
 	width: auto;
@@ -97,7 +98,7 @@ onMounted(() => {
         left: 0;
         width: 100%;
         height: 4px;
-				background-image: linear-gradient(to left, #fefefe, #e2deee, #c9bfdd, #b29fcb, #9d80b8);
+				// background-image: linear-gradient(to left, #fefefe, #e2deee, #c9bfdd, #b29fcb, #9d80b8);
         border-radius: 0px 0px 5px 5px;
     }
 }
