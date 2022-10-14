@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import NotificationsList from "./components/Notification/NotificationList.vue";
 import { toast } from "./components/Notification/Toastify.js";
+import Cookie from "./components/Cookie/Cookie.vue";
+import ToogleButton from "./components/Cookie/ToogleButton.vue";
 
 const notifications = ref([]);
 
@@ -36,6 +38,7 @@ const clickHandler = () => {
 		<button @click="clickHandler">Show Notification</button>
 	</div>
 	<NotificationsList :notifications="notifications"></NotificationsList>
+	<Cookie></Cookie>
 </template>
 
 <style lang="scss" scoped>

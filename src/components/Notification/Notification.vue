@@ -70,7 +70,6 @@ onMounted(() => {
 	max-width: 300px;
 	width: auto;
 	z-index: 99;
-	font-family: Arial, Helvetica, sans-serif;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	&__text {
 		font-size: 12px;
