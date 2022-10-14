@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import NotificationsList from "./components/NotificationList.vue";
-import { toast } from "./components/Toastify.js";
+import NotificationsList from "./components/Notification/NotificationList.vue";
+import { toast } from "./components/Notification/Toastify.js";
 
 const notifications = ref([]);
 
@@ -23,12 +23,10 @@ const clickHandler = () => {
 	// 	toast().error()
 	// ];
 	notifications.value.push(toast("This is a test notification", {
-		position: "top-left",
-		background: "#9D80B8",
-		barActive : true,
-		barBackground : "#cdcdcd",
 		icon: "🤞",
 		duration : 5000,
+		theme: "light",
+		barBackground : "orange",
 	}));
 };
 </script>

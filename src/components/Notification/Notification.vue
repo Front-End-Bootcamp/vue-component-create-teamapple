@@ -10,6 +10,7 @@ const emit = defineEmits(["update:id"]);
 const position = props.notification.class.position;
 const backgroundColor = props.notification.class.background;
 const barBackground = props.notification.class.barBackground;
+const theme = props.notification.class.theme;
 
 const closeHandler = () => {
 	emit("update:id", props.notification.id);
@@ -36,7 +37,7 @@ onMounted(() => {
 
 <template>
 	<template v-if="isClose">
-		<div class="notification--message" :class="position" :style="{backgroundColor : backgroundColor}" >
+		<div class="notification--message" :class="position,theme" :style="{backgroundColor : backgroundColor}" >
 			<div class="notification--message__text">
 				<span class="material-symbols-outlined">
 					{{ props.notification.icon }}
@@ -63,7 +64,6 @@ onMounted(() => {
 	align-items: center;
 	justify-content: space-between;
 	border-radius: 5px;
-	color: white;
 	margin: 8px;
 	padding: 12px 5px;
 	min-width: 150px;
@@ -98,8 +98,16 @@ onMounted(() => {
         left: 0;
         width: 100%;
         height: 4px;
-				// background-image: linear-gradient(to left, #fefefe, #e2deee, #c9bfdd, #b29fcb, #9d80b8);
         border-radius: 0px 0px 5px 5px;
     }
+}
+
+.dark{
+		background-color: #212121;
+		color: #fafafa;
+}
+.light{
+		background-color: #fafafa;
+		color: #212121;
 }
 </style>
