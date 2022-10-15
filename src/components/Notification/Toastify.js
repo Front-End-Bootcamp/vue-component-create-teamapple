@@ -1,5 +1,5 @@
 export const toast = (message = "Default Message", options = {}) => {
-	const { background = '#212121', position = 'top-right', icon = "mood", duration = 10000 ,barActive=true,barBackground="white"} = options;
+	const {background, position = 'top-right', icon = "mood", duration = 10000 ,barActive=true, barBackground="gray", theme="light"} = options;
 	const toast = {
 		id: new Date().getTime(),
 		description: message,
@@ -8,6 +8,7 @@ export const toast = (message = "Default Message", options = {}) => {
 		icon,
 		barActive,
 		class: {
+			theme,
 			barBackground,
 			position,
 			background,

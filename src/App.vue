@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import NotificationsList from "./components/NotificationList.vue";
-import { toast } from "./components/Toastify.js";
+import NotificationsList from "./components/Notification/NotificationList.vue";
+import { toast } from "./components/Notification/Toastify.js";
 
 const notifications = ref([]);
 
