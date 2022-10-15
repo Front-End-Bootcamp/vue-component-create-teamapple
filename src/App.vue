@@ -5,23 +5,29 @@ import { toast } from "./components/Notification/Toastify.js";
 
 const notifications = ref([]);
 
-const clickHandler = () => {
+const customHandler = () => {
 
-	notifications.value.push(toast("This is a test notification", {
+	notifications.value.push(toast("This is a custom notification", {
 		icon: "🤞",
 		duration : 5000,
-		theme: "dark",
+		background :"#f0f0f0",
+		color : "#212121",
 		barBackground : "orange",
 	}));
 
 };
+
+const successHandler = () => {
+	notifications.value.push(toast().success())
+}
 
 
 </script>
 
 <template>
 	<div class="container">
-		<button @click="clickHandler">Show Notification</button>
+		<button @click="customHandler">Show Custom Notification</button>
+		<button @click="successHandler">Show Success Notification</button>
 	</div>
 	<Teleport to="#notification">
 		<NotificationsList :notifications="notifications"></NotificationsList>
