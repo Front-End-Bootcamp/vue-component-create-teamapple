@@ -1,8 +1,77 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8837446&assignment_repo_type=AssignmentRepo)
-# Vue 3 + Vite
+# Vue - Notification Project
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![Video_2022_10_15-3 (1)](https://user-images.githubusercontent.com/72731296/195981401-c4718528-f08f-48e7-a176-d630d3ba9b7a.gif)
 
-## Recommended IDE Setup
+## Usage
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+```bash
+import { ref } from "vue";
+import NotificationsList from "./components/Notification/NotificationList.vue";
+import { toast } from "./components/Notification/Toastify.js";
+
+```
+
+```bash
+const notifications = ref([]);
+
+notifications.value.push(toast())
+
+<template>
+	<div>
+		<NotificationsList :notifications="notifications"></NotificationsList>
+	</div>
+</template>
+```
+## Creating a Notification
+
+### Custom Notification
+```bash
+notifications.value.push(toast("This is a custom notification", {
+	position : "top-center"
+	icon: "😉",
+	background : "#fafafa",
+	color: "#000",
+	duration : 6000,
+	barBackground : "red",
+	}))
+```
+
+### Success Notification
+```bash
+notifications.value.push(toast().success("Success Notification Message"))
+```
+### Error Notification
+```bash
+notifications.value.push(toast().error("Error notification",{
+	position : "bottom-right"
+	icon : "🤬",
+	duration : 5000,
+	background : "red"
+	color : "black"
+	barActive : false
+}))
+```
+### Warning Notification
+```bash
+notifications.value.push(toast().warning())
+```
+
+### Info Notification
+```bash
+notifications.value.push(toast().info())
+```
+
+
+### Props
+
+| Prop                   | Type    |	Default                                   |
+| ---------------------- | ------- | ------------------------------------------ |
+| description            | String  | Default Message                            |
+| position               | String  | 'top-right'                                |
+| icon                   | String  | 'mood'                                     |
+| duration               | Number  | 10000                                      |
+| background             | String  | 'black'                                    |
+| barBackground          | String  | 'gray'                                     |
+| barActive              | Boolen  | true                                       |
+| color                  | String  | 'white'                                    |
+

@@ -10,11 +10,10 @@ const emit = defineEmits(["update:id"]);
 const position = props.notification.class.position;
 const backgroundColor = props.notification.class.background;
 const barBackground = props.notification.class.barBackground;
-const theme = props.notification.class.theme;
+const color = props.notification.class.color;
 
 const closeHandler = () => {
 	emit("update:id", props.notification.id);
-	console.log(position)
 };
 
 const startTimer = (time) => {
@@ -37,34 +36,30 @@ onMounted(() => {
 
 <template>
 	<template v-if="isClose">
-		<div class="notification--message" :class="position,theme" :style="{backgroundColor : backgroundColor}" >
-			<div class="notification--message__text">
+		<div class="notification--message" :class="position" :style="{backgroundColor : backgroundColor}" >
+			<div class="notification--message__text" :style="{color : color }">
 				<span class="material-symbols-outlined">
 					{{ props.notification.icon }}
 				</span>
 				{{ props.notification.description }}	
 			</div>
-			<button class="notification--message__close" @click="closeHandler">
+			<div class="notification--message__close" @click="closeHandler">
 				<span class="material-symbols-outlined"> close </span>
-			</button>
+			</div>
 			<div v-if="props.notification.barActive" class="notification--message__bar" :style="{ width: `${barWidth}%` , backgroundColor : barBackground}" ></div>
 		</div>
 	</template>
 </template>
 
 <style scoped lang="scss">
-.notification--message__close {
-	border: 0;
-	background-color: transparent;
-	color: #fafafa;
-}
+
 .notification--message {
 	display: flex;
 	position: relative;
 	align-items: center;
 	justify-content: space-between;
 	border-radius: 5px;
-	margin: 8px;
+	margin: 10px;
 	padding: 12px 5px;
 	min-width: 150px;
 	max-width: 300px;
@@ -87,8 +82,10 @@ onMounted(() => {
 		display: flex;
 		align-items: center;
 		span {
-			font-size: 18px;
+			font-size: 14px;
 			margin-left: 5px;
+			color: rgb(59, 46, 46);
+			font-weight: bolder;
 		}
 	}
 	&__bar{
@@ -99,14 +96,5 @@ onMounted(() => {
         height: 4px;
         border-radius: 0px 0px 5px 5px;
     }
-}
-
-.dark{
-		background-color: #212121;
-		color: #fafafa;
-}
-.light{
-		background-color: #fafafa;
-		color: #212121;
 }
 </style>

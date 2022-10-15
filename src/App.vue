@@ -1,36 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import {ref } from "vue";
 import NotificationsList from "./components/Notification/NotificationList.vue";
 import { toast } from "./components/Notification/Toastify.js";
-import Cookie from "./components/Cookie/Cookie.vue";
-import ToogleButton from "./components/Cookie/ToogleButton.vue";
 
 const notifications = ref([]);
 
 const clickHandler = () => {
-	// notifications.value = [
-	// 	...notifications.value,
-	// 	toast("This is a test notification", {
-	// 		position: "top-left",
-	// 		background: "#9D80B8",
-	// 		icon: "🤞",
-	// 		duration : 5000,
-	// 	}),
-	// 	toast().info("This is a test notification", {
-	// 		position: "top-left",
-	// 		icon: "👍",
-	// 		background : "indigo",
-	// 		duration : 5000,
-	// 	}),
-	// 	toast().error()
-	// ];
+
 	notifications.value.push(toast("This is a test notification", {
 		icon: "🤞",
 		duration : 5000,
-		theme: "light",
+		theme: "dark",
 		barBackground : "orange",
 	}));
+
 };
+
+
 </script>
 
 <template>
@@ -38,7 +24,6 @@ const clickHandler = () => {
 		<button @click="clickHandler">Show Notification</button>
 	</div>
 	<NotificationsList :notifications="notifications"></NotificationsList>
-	<Cookie></Cookie>
 </template>
 
 <style lang="scss" scoped>

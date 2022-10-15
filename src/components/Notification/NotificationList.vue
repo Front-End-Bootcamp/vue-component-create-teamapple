@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-
 import Notification from "./Notification.vue";
+
 const props = defineProps(["notifications"]);
 const remove = ref(null);
 
