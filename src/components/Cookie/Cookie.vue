@@ -1,6 +1,23 @@
 <script setup>
-	import { ref ,computed, reactive} from "vue";
+	import { ref ,computed, reactive, toRefs} from "vue";
 	import CookieSettings from "./CookieSettings.vue";
+	import ButtonComp from "./Button.vue";
+
+	const props = defineProps(
+		{
+			cookieData: {
+				type: Object,
+				required: true,
+			},
+		}
+		);
+
+	const defaultDesc = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+
+	const {title="Default Title"} = (props.cookieData);
+	const {description=defaultDesc} = (props.cookieData);
+	const {rejectActive} = (props.cookieData);
+
 
 	const cookieActive = computed(  () => {
 		return localStorage.getItem("cookie") === "false" ? false : true;
@@ -26,20 +43,34 @@
 		showComp.cookie= false
 	};
 
+	const buttonData = {
+		accept : {
+			text: "Accept",
+			handler: acceptHandler
+		},
+		decline : {
+			text: "Decline",
+			active: rejectActive,
+			handler: declineHandler,
+		},
+		settings : {
+			text: "Settings",
+			handler: settingsHandler
+		}
+	}
+
 </script>
 
 <template>
 	<div v-if="showComp.cookie" class="cookie">
 		<div class="cookie--header">
-			<h2>Cookies</h2>
+			<h2>{{title}}</h2>
 		</div>
 		<div class="cookie--body">
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident excepturi vitae voluptates atque ullam eius eos explicabo assumenda est nulla voluptas, dolorum omnis quaerat reprehenderit adipisci veritatis autem aspernatur id?</p>
+			<p>{{description}}</p>
 		</div>
 		<div class="cookie--footer">
-			<button class="cookie--footer__button" @click="settingsHandler" >Settings</button>
-			<button class="cookie--footer__button" @click="acceptHandler" >Accept</button>
-			<button class="cookie--footer__button" @click="declineHandler">Reject</button>
+			<ButtonComp v-for="button in buttonData" :button="button" ></ButtonComp>
 		</div>
 	</div>
 	<CookieSettings v-if="showComp.settings" :isShow="showComp" ></CookieSettings>
@@ -60,6 +91,7 @@
 	position: fixed;
 	bottom: 20px;
 	right: 50%;
+	padding: 10px;
 	transform: translateX(50%);
 	transition: 0.8s ease-in-out;
 	animation: cookie 0.8s ease-in-out;
@@ -101,20 +133,7 @@
 		align-items: center;
 		border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
-		&__button{
-			background-color: #121212;
-			color: white;
-			padding: 10px;
-			border-radius: 5px;
-			margin: 10px;
-			border: none;
-			cursor: pointer;
-			font-size: 14px;
-			font-weight: 500;
-			&:hover {
-				background-color: #424242;
-			}
-		}
+	
 	}
 }
 
