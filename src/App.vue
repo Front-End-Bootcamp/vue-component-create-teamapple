@@ -23,7 +23,9 @@ const clickHandler = () => {
 	<div class="container">
 		<button @click="clickHandler">Show Notification</button>
 	</div>
-	<NotificationsList :notifications="notifications"></NotificationsList>
+	<Teleport to="#notification">
+		<NotificationsList :notifications="notifications"></NotificationsList>
+	</Teleport>
 </template>
 
 <style lang="scss" scoped>

@@ -17,21 +17,20 @@ const closeHandler = () => {
 };
 
 const startTimer = (time) => {
-		const timer = setInterval(() => {
-				barWidth.value -= 1;
-				if (barWidth.value === 0) {
-						clearInterval(timer);
-				}
-		}, time / 100);
-  }
+	const timer = setInterval(() => {
+		barWidth.value -= 1;
+		if (barWidth.value === 0) {
+			clearInterval(timer);
+		}
+	}, time / 100);
+};
 
 onMounted(() => {
 	setTimeout(() => {
 		isClose.value = false;
 	}, props.notification.duration);
-	startTimer(props.notification.duration)
+	startTimer(props.notification.duration);
 });
-
 </script>
 
 <template>
@@ -41,7 +40,7 @@ onMounted(() => {
 				<span class="material-symbols-outlined">
 					{{ props.notification.icon }}
 				</span>
-				{{ props.notification.description }}	
+				{{ props.notification.description }}
 			</div>
 			<div class="notification--message__close" @click="closeHandler">
 				<span class="material-symbols-outlined"> close </span>
@@ -88,13 +87,13 @@ onMounted(() => {
 			font-weight: bolder;
 		}
 	}
-	&__bar{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        border-radius: 0px 0px 5px 5px;
-    }
+	&__bar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 4px;
+		border-radius: 0px 0px 5px 5px;
+	}
 }
 </style>
