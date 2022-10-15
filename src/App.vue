@@ -6,38 +6,39 @@ import { toast } from "./components/Toastify.js";
 const notifications = ref([]);
 
 const clickHandler = () => {
-	// notifications.value = [
-	// 	...notifications.value,
-	// 	toast("This is a test notification", {
-	// 		position: "top-left",
-	// 		background: "#9D80B8",
-	// 		icon: "🤞",
-	// 		duration : 5000,
-	// 	}),
-	// 	toast().info("This is a test notification", {
-	// 		position: "top-left",
-	// 		icon: "👍",
-	// 		background : "indigo",
-	// 		duration : 5000,
-	// 	}),
-	// 	toast().error()
-	// ];
-	notifications.value.push(toast("This is a test notification", {
-		position: "top-left",
-		background: "#9D80B8",
-		barActive : true,
-		barBackground : "#cdcdcd",
-		icon: "🤞",
-		duration : 5000,
-	}));
+	notifications.value.push(
+		toast("This is a test notification", {
+			position: "top-right",
+			background: "#9D80B8",
+			barActive: true,
+			barBackground: "#cdcdcd",
+			icon: "👍",
+			duration: 5000,
+		})
+	);
+};
+const clickHandler2 = () => {
+	notifications.value.push(
+		toast("This is a test notification 2", {
+			position: "top-right",
+			background: "blueviolet",
+			barActive: true,
+			barBackground: "#cdcdcd",
+			icon: "👍",
+			duration: 5000,
+		})
+	);
 };
 </script>
 
 <template>
 	<div class="container">
 		<button @click="clickHandler">Show Notification</button>
+		<button @click="clickHandler2">Show Blue Notification</button>
 	</div>
-	<NotificationsList :notifications="notifications"></NotificationsList>
+	<Teleport to="#notification">
+		<NotificationsList :notifications="notifications"></NotificationsList>
+	</Teleport>
 </template>
 
 <style lang="scss" scoped>
