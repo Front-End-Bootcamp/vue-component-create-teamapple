@@ -17,6 +17,7 @@
 	const {title="Default Title"} = (props.cookieData);
 	const {description=defaultDesc} = (props.cookieData);
 	const {rejectActive} = (props.cookieData);
+	const {cookieSettings} = (props.cookieData);
 
 
 	const cookieActive = computed(  () => {
@@ -73,7 +74,7 @@
 			<ButtonComp v-for="button in buttonData" :button="button" ></ButtonComp>
 		</div>
 	</div>
-	<CookieSettings v-if="showComp.settings" :isShow="showComp" ></CookieSettings>
+	<CookieSettings v-if="showComp.settings" :isShow="showComp" :cookieSettings="cookieSettings" ></CookieSettings>
 </template>
 
 <style lang="scss" scoped>

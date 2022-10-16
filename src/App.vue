@@ -6,12 +6,21 @@ import Cookie from "./components/Cookie/Cookie.vue";
 
 const notifications = ref([]);
 
+const cookieSettingsData  = [
+	{
+		title : "Cookie Ayarları",
+		description : "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
+		isActive : false,
+	},
+]
+
 const cookieData = reactive({
 		title: "Daha iyi bir deneyim için izninizi istiyoruz.",
-		cookieName: "Cookie Name",
 		description: "Daha iyi bir deneyim için izninizi istiyoruz.Tanımlama bilgilerini; sitemizin doğru şekilde çalışmasını sağlamak, içerikleri ve reklamları kişiselleştirmek, sosyal medya özellikleri sunmak ve site trafiğimizi analiz etmek için kullanıyoruz. Aynı zamanda site kullanımınızla ilgili bilgileri; sosyal medya, reklamcılık ve analiz ortaklarımızla paylaşıyoruz.",
 		rejectActive: false,
+		cookieSettings : cookieSettingsData
 });
+
 
 const clickHandler = () => {
 	notifications.value.push(toast("This is a test notification", {
