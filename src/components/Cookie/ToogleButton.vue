@@ -15,8 +15,6 @@
 </template>
 
 <style lang="scss" scoped>
-
-
 .button
 {
     position: relative;

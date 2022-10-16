@@ -6,6 +6,8 @@ import Cookie from "./components/Cookie/Cookie.vue";
 
 const notifications = ref([]);
 
+const privacy = "When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience. Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer."
+
 const cookieSettingsData  = [
 	{
 		title : "Cookie Ayarları",
@@ -16,9 +18,10 @@ const cookieSettingsData  = [
 
 const cookieData = reactive({
 		title: "Daha iyi bir deneyim için izninizi istiyoruz.",
-		description: "Daha iyi bir deneyim için izninizi istiyoruz.Tanımlama bilgilerini; sitemizin doğru şekilde çalışmasını sağlamak, içerikleri ve reklamları kişiselleştirmek, sosyal medya özellikleri sunmak ve site trafiğimizi analiz etmek için kullanıyoruz. Aynı zamanda site kullanımınızla ilgili bilgileri; sosyal medya, reklamcılık ve analiz ortaklarımızla paylaşıyoruz.",
+		description: "By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. ",
 		rejectActive: false,
-		cookieSettings : cookieSettingsData
+		cookieSettings : cookieSettingsData,
+		privacy,
 });
 
 

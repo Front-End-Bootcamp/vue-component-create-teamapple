@@ -1,9 +1,9 @@
 <script setup>
 import { ref, toRefs } from 'vue';
-import ToogleButton from './ToogleButton.vue';
 import CookieSettingsItem from './CookieSettingsItem.vue';
+import CookieModal from './CookieModal.vue';
 
-const props = defineProps(['isShow',"cookieSettings"]);
+const props = defineProps(['isShow',"cookieSettings","privacy"]);
 
 const {cookie} = toRefs(props.isShow)
 const {settings} = toRefs(props.isShow)
@@ -24,12 +24,13 @@ const selectData = ref([
 	{
 		id : 2 ,
 		name : "Privacy Policy",
-		isActive : false
+		isActive : false,
+		text : props.privacy
 	},
 	{
 		id : 3 ,
 		name : "Terms of Service",
-		isActive : false
+		isActive : false,
 	},
 	{
 		id : 4 ,
@@ -43,7 +44,7 @@ const selectData = ref([
 	},
 ])
 
-const selectHandler = (event) => {
+const selectHandler = () => {
 	selectData.value.forEach((item) => {
 		if(item.name === selected.value){
 			item.isActive = true
@@ -51,9 +52,7 @@ const selectHandler = (event) => {
 			item.isActive = false
 		}
 	})
-
 }
-
 
 </script>
 
@@ -76,7 +75,12 @@ const selectHandler = (event) => {
 			</div>
 		</div>
 		<div class="settings--content">
-			<CookieSettingsItem v-for="item in cookieSettings" :cookieSetting="item" ></CookieSettingsItem>
+			<template v-if="selected === 'Cookie Settings'" >
+				<CookieSettingsItem v-for="item in cookieSettings" :cookieSetting="item" ></CookieSettingsItem>
+			</template>
+			<template v-else>
+				<CookieModal  v-for="item in selectData" :item="item" > </CookieModal>
+			</template>
 		</div>
 		<div class="settings--footer">
 			<button class="settings--footer--button">Save</button>
@@ -124,7 +128,6 @@ const selectHandler = (event) => {
 					font-weight: 500;
 				}
 			}
-
 			.material-symbols-outlined{
 				color: white;
 				font-size: 28px;
