@@ -1,0 +1,130 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #ffffffde;
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#popup {
+  position: absolute;
+  display: flex;
+}
+
+.popup {
+  border-radius: 5px;
+  border: 2px solid #808080;
+  background-color: #fafafac5;
+  color: #242424;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__media {
+    display: flex;
+    align-items: center;
+    place-items: center;
+    margin: 0.6rem 1.2rem;
+    img {
+      border-radius: 0.3rem;
+      filter: drop-shadow(15px 12px 8px rgba(0, 0, 0, 0.25));
+      object-fit: contain;
+      height: 650px;
+    }
+  }
+
+  &__close {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    cursor: pointer;
+    color: #fafafad2;
+    margin: auto 1.2rem 0.6rem auto;
+
+    &:hover {
+      opacity: 0.7;
+    }
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__open {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    cursor: pointer;
+    background-color: #3bb856;
+    color: #fafafad2;
+    margin: auto 0 0 auto;
+    &:hover {
+      background-color: #74f568;
+    }
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__description {
+    width: 650px;
+    height: 650px;
+    overflow-y: auto;
+  }
+}
+
+.btnGroups {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.showButton {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: #646cff;
+  }
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
