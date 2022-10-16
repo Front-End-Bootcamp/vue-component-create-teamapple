@@ -2,16 +2,18 @@
 <script setup>
 import ToogleButton from './ToogleButton.vue';
 const props = defineProps(["cookieSetting"])
+
+
 </script>
 
 <template>
-	<div v-for="i in 5" class="settings--item">
+	<div class="settings--item">
 		<div>
 			<h3 class="settings--item__title">{{props.cookieSetting.title}}</h3>
 			<p class="settings--item__descr">{{props.cookieSetting.description}}</p>
 		</div>
 		<div>
-			<ToogleButton></ToogleButton>
+			<ToogleButton :cookieSetting="cookieSetting" ></ToogleButton>
 		</div>
 	</div>
 </template>

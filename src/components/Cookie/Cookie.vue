@@ -2,6 +2,7 @@
 	import { ref ,computed, reactive, toRefs} from "vue";
 	import CookieSettings from "./CookieSettings.vue";
 	import ButtonComp from "./Button.vue";
+	import {setCookie,getCookie} from "./CookieFunc.js";
 
 	const props = defineProps(
 		{
@@ -21,8 +22,8 @@
 	const {privacy} = (props.cookieData);
 
 
-	const cookieActive = computed(  () => {
-		return localStorage.getItem("cookie") === "false" ? false : true;
+	const cookieActive = computed( () => {
+		return getCookie("cookieShow") === "false" ? false : true;
 	})
 
 	const showComp = reactive({
@@ -32,12 +33,14 @@
 
 	const acceptHandler = () => {
 		showComp.cookie = false
-		localStorage.setItem("cookie",JSON.stringify(false))
+		// localStorage.setItem("cookie",JSON.stringify(false))
+		setCookie("cookieShow",false,1)
 	};
 
 	const declineHandler = () => {
 		showComp.cookie = false
-		localStorage.setItem("cookie",JSON.stringify(true))
+		setCookie("cookieShow",true,1)
+		// localStorage.setItem("cookie",JSON.stringify(true))
 	};
 
 	const settingsHandler = () => {
@@ -47,16 +50,16 @@
 
 	const buttonData = {
 		accept : {
-			text: "Accept",
+			text: "Accept All Cookies",
 			handler: acceptHandler
 		},
 		decline : {
-			text: "Decline",
+			text: "Decline All Cookies",
 			active: rejectActive,
 			handler: declineHandler,
 		},
 		settings : {
-			text: "Settings",
+			text: "Cookie Settings",
 			handler: settingsHandler
 		}
 	}

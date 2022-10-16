@@ -2,16 +2,12 @@
 import { ref, toRefs } from 'vue';
 import CookieSettingsItem from './CookieSettingsItem.vue';
 import CookieModal from './CookieModal.vue';
+import {setCookie} from "./CookieFunc.js";
 
 const props = defineProps(['isShow',"cookieSettings","privacy"]);
 
 const {cookie} = toRefs(props.isShow)
 const {settings} = toRefs(props.isShow)
-
-const closeHandler = () => {
-	cookie.value = true;
-	settings.value = false;
-};
 
 const selected = ref("Cookie Settings")
 
@@ -29,20 +25,25 @@ const selectData = ref([
 	},
 	{
 		id : 3 ,
-		name : "Terms of Service",
+		name : "Strictly Necessary Cookies",
 		isActive : false,
 	},
 	{
 		id : 4 ,
-		name : "Imprint",
+		name : "Performance Cookies",
 		isActive : false
 	},
 	{
 		id : 5 ,
-		name : "Contact",
+		name : "Functional Cookies",
 		isActive : false
 	},
 ])
+
+const closeHandler = () => {
+	cookie.value = true;
+	settings.value = false;
+};
 
 const selectHandler = () => {
 	selectData.value.forEach((item) => {
@@ -53,6 +54,13 @@ const selectHandler = () => {
 		}
 	})
 }
+
+
+const saveHandler = () => {
+	cookie.value = true;
+	settings.value = false;
+	setCookie("cookie","saveCookie",5)
+};
 
 </script>
 
@@ -83,7 +91,7 @@ const selectHandler = () => {
 			</template>
 		</div>
 		<div class="settings--footer">
-			<button class="settings--footer--button">Save</button>
+			<button class="settings--footer--button" @click="saveHandler" >Confirm My Choices</button>
 		</div>
 	</div>
 
@@ -149,7 +157,8 @@ const selectHandler = () => {
 			padding: 0 10px;
 			outline: none;
 			cursor: pointer;
-		}
+
+ 		}
 
 		&--content{
 			width: 100%;
@@ -171,7 +180,7 @@ const selectHandler = () => {
 			&--button{
 				background-color: #121212;
 				border: 2px solid #121212;
-				border-radius: 20px;
+				border-radius: 10px;
 				color: white;
 				font-size: 14px;
 				font-weight: 500;

@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref } from "vue";
+import {onMounted, reactive, ref } from "vue";
 import NotificationsList from "./components/Notification/NotificationList.vue";
 import { toast } from "./components/Notification/Toastify.js";
 import Cookie from "./components/Cookie/Cookie.vue";
@@ -14,12 +14,22 @@ const cookieSettingsData  = [
 		description : "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
 		isActive : false,
 	},
+	{
+		title : "Cookie Ayarları",
+		description : "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
+		isActive : true,
+	},
+	{
+		title : "Cookie Ayarları",
+		description : "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
+		isActive : false,
+	},
 ]
 
 const cookieData = reactive({
-		title: "Daha iyi bir deneyim için izninizi istiyoruz.",
+		title: "We ask for your permission for a better experience.",
 		description: "By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. ",
-		rejectActive: false,
+		rejectActive: true,
 		cookieSettings : cookieSettingsData,
 		privacy,
 });
