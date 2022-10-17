@@ -14,12 +14,17 @@
 		);
 
 	const defaultDesc = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
-
 	const {title="Default Title"} = (props.cookieData);
 	const {description=defaultDesc} = (props.cookieData);
 	const {rejectActive} = (props.cookieData);
-	const {cookieSettings} = (props.cookieData);
-	const {privacyPolicy} = (props.cookieData);
+	const {cookieSettings=
+		[{
+				title : "Cookie Settings",
+				description : "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+				isActive : false
+		}]} = (props.cookieData);
+	
+	const {privacyPolicy } = (props.cookieData);
 
 
 	const cookieActive = computed( () => {
