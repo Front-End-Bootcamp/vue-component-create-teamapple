@@ -1,17 +1,62 @@
 <script setup>
 import { ref, toRefs } from 'vue';
-import ToogleButton from './ToogleButton.vue';
+import CookieSettingsItem from './CookieSettingsItem.vue';
+import CookieModal from './CookieModal.vue';
+import {setCookie} from "./CookieFunc.js";
 
-const props = defineProps(['isShow']);
+const props = defineProps(['isShow',"cookieSettings","privacy"]);
 
 const {cookie} = toRefs(props.isShow)
 const {settings} = toRefs(props.isShow)
+
+const selected = ref("Cookie Settings")
+
+const selectData = ref([
+	{
+		id : 1 ,
+		name : "Cookie Settings",
+		isActive : true
+	},
+	{
+		id : 2 ,
+		name : "Privacy Policy",
+		isActive : false,
+		text : props.privacy
+	},
+	{
+		id : 3 ,
+		name : "Strictly Necessary Cookies",
+		isActive : false,
+	},
+	{
+		id : 4 ,
+		name : "Performance Cookies",
+		isActive : false
+	},
+	{
+		id : 5 ,
+		name : "Functional Cookies",
+		isActive : false
+	},
+])
+
+const selectHandler = () => {
+	selectData.value.forEach((item) => {
+		if (item.name === selected.value) return item.isActive = true
+		item.isActive = false
+	})
+}
 
 const closeHandler = () => {
 	cookie.value = true;
 	settings.value = false;
 };
 
+const saveHandler = () => {
+	cookie.value = true;
+	settings.value = false;
+	setCookie("cookie","saveCookie",5)
+};
 
 </script>
 
@@ -23,7 +68,9 @@ const closeHandler = () => {
 				<span class="material-symbols-outlined">
 				tune
 				</span>
-				<h2>Cookie Settings</h2>
+					<select v-model="selected" @change="selectHandler()" class="settings--select" >
+						<option v-for="select in selectData" :key="select.id" :value="select.name" >{{select.name}}</option>
+					</select>
 			</div>
 			<div class="settins--header__icon" @click="closeHandler">
 				<span class="material-symbols-outlined">
@@ -32,18 +79,15 @@ const closeHandler = () => {
 			</div>
 		</div>
 		<div class="settings--content">
-			<div class="settings--content__item">
-				<div>
-					<h3 class="title">Cookie Name</h3>
-					<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</div>
-				<div>
-					<ToogleButton></ToogleButton>
-				</div>
-			</div>
+			<template v-if="selected === 'Cookie Settings'" >
+				<CookieSettingsItem v-for="item in cookieSettings" :cookieSetting="item" ></CookieSettingsItem>
+			</template>
+			<template v-else>
+				<CookieModal v-for="item in selectData" :item="item" > </CookieModal>
+			</template>
 		</div>
 		<div class="settings--footer">
-			<button class="settings--footer--button">Save</button>
+			<button class="settings--footer--button" @click="saveHandler" >Confirm My Choices</button>
 		</div>
 	</div>
 
@@ -75,6 +119,7 @@ const closeHandler = () => {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			margin-bottom: 5px;
 			border-top-left-radius: 20px;
 			border-top-right-radius: 20px;
 
@@ -87,42 +132,34 @@ const closeHandler = () => {
 					font-weight: 500;
 				}
 			}
-
 			.material-symbols-outlined{
 				color: white;
 				font-size: 28px;
 				margin-right: 10px;
 				cursor: pointer;
 			}
-
 		}
+
+		&--select{
+			width: 200px;
+			height: 40px;
+			border: none;
+			border-radius: 10px;
+			background-color: #121212;
+			color: white;
+			font-size: 16px;
+			font-weight: 500;
+			padding: 0 10px;
+			outline: none;
+			cursor: pointer;
+ 		}
 
 		&--content{
 			width: 100%;
 			height: 90%;
 			display: flex;
 			flex-direction: column;
-			&__item{
-				width: 100%;
-				border: 2px solid #121212;
-				margin: 10px 0px;
-				padding: 10px;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				border-radius: 10px;
-				.title{
-					color: white;
-					font-size: 16px;
-					font-weight: 500;
-					margin-bottom: 5px;
-				}
-				.description{
-					color: white;
-					font-size: 14px;
-					font-weight: 500;
-				}
-			}
+			color: white;
 		}
 
 		&--footer{
@@ -136,7 +173,7 @@ const closeHandler = () => {
 			&--button{
 				background-color: #121212;
 				border: 2px solid #121212;
-				border-radius: 20px;
+				border-radius: 10px;
 				color: white;
 				font-size: 14px;
 				font-weight: 500;
@@ -149,8 +186,60 @@ const closeHandler = () => {
 				}
 			}
 		}
-
 	}
-
+	@media screen and (max-width: 950px){
+		.settings{
+			width: 60%;
+			height: 60%;
+		}
+	}
+	@media screen and (max-width: 768px){
+		.settings{
+			width: 80%;
+			height: 60%;
+			&--header{
+				&__title{
+					&>h2{
+						font-size: 16px;
+					}
+				}
+			}
+			&--select{
+				width: 150px;
+				height: 30px;
+				font-size: 14px;
+			}
+			&--footer{
+				&--button{
+					font-size: 12px;
+					padding: 5px 10px;
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 480px){
+		.settings{
+			width: 90%;
+			height: 70%;
+			&--header{
+				&__title{
+					&>h2{
+						font-size: 14px;
+					}
+				}
+			}
+			&--select{
+				width: 150px;
+				height: 40px;
+				font-size: 12px;
+			}
+			&--footer{
+				&--button{
+					font-size: 12px;
+					padding: 10px 10px;
+				}
+			}
+		}
+	}
 
 </style>
