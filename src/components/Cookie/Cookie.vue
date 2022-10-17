@@ -1,48 +1,87 @@
 <script setup>
-	import { ref ,computed, reactive} from "vue";
+	import {computed, reactive} from "vue";
 	import CookieSettings from "./CookieSettings.vue";
+	import ButtonComp from "./Button.vue";
+	import {setCookie,getCookie} from "./CookieFunc.js";
 
-	const cookieActive = computed(  () => {
-		return localStorage.getItem("cookie") === "false" ? false : true;
+	const props = defineProps(
+		{
+			cookieData: {
+				type: Object,
+				required: true,
+			},
+		}
+		);
+
+	const defaultDesc = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+	const {title="Default Title"} = (props.cookieData);
+	const {description=defaultDesc} = (props.cookieData);
+	const {rejectActive} = (props.cookieData);
+	const {cookieSettings=
+		[{
+				title : "Cookie Settings",
+				description : "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+				isActive : false
+		}]} = (props.cookieData);
+	
+	const {privacyPolicy } = (props.cookieData);
+
+
+	const cookieActive = computed( () => {
+		return getCookie("cookieShow") === "false" ? false : true;
 	})
 
-	const showComp = reactive({
+	const isActive = reactive({
 		cookie: cookieActive.value,
 		settings: false
 	})
 
 	const acceptHandler = () => {
-		showComp.cookie = false
-		localStorage.setItem("cookie",JSON.stringify(false))
+		isActive.cookie = false
+		setCookie("cookieShow",false,10) // 10 minute to clear cookie
 	};
 
 	const declineHandler = () => {
-		showComp.cookie = false
-		localStorage.setItem("cookie",JSON.stringify(true))
+		isActive.cookie = false
+		setCookie("cookieShow",true,10)
 	};
 
 	const settingsHandler = () => {
-		showComp.settings = true
-		showComp.cookie= false
+		isActive.settings = true
+		isActive.cookie= false
 	};
+
+	const buttonData = {
+		accept : {
+			text: "Accept All Cookies",
+			handler: acceptHandler
+		},
+		decline : {
+			text: "Decline All Cookies",
+			active: rejectActive,
+			handler: declineHandler,
+		},
+		settings : {
+			text: "Cookie Settings",
+			handler: settingsHandler
+		}
+	}
 
 </script>
 
 <template>
-	<div v-if="showComp.cookie" class="cookie">
+	<div v-if="isActive.cookie" class="cookie">
 		<div class="cookie--header">
-			<h2>Cookies</h2>
+			<h2>{{title}}</h2>
 		</div>
 		<div class="cookie--body">
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident excepturi vitae voluptates atque ullam eius eos explicabo assumenda est nulla voluptas, dolorum omnis quaerat reprehenderit adipisci veritatis autem aspernatur id?</p>
+			<p>{{description}}</p>
 		</div>
 		<div class="cookie--footer">
-			<button class="cookie--footer__button" @click="settingsHandler" >Settings</button>
-			<button class="cookie--footer__button" @click="acceptHandler" >Accept</button>
-			<button class="cookie--footer__button" @click="declineHandler">Reject</button>
+			<ButtonComp v-for="button in buttonData" :button="button" ></ButtonComp>
 		</div>
 	</div>
-	<CookieSettings v-if="showComp.settings" :isShow="showComp" ></CookieSettings>
+	<CookieSettings v-if="isActive.settings" :isShow="isActive" :cookieSettings="cookieSettings" :privacy="privacyPolicy" ></CookieSettings>
 </template>
 
 <style lang="scss" scoped>
@@ -60,6 +99,7 @@
 	position: fixed;
 	bottom: 20px;
 	right: 50%;
+	padding: 10px;
 	transform: translateX(50%);
 	transition: 0.8s ease-in-out;
 	animation: cookie 0.8s ease-in-out;
@@ -101,18 +141,24 @@
 		align-items: center;
 		border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
-		&__button{
-			background-color: #121212;
-			color: white;
-			padding: 10px;
-			border-radius: 5px;
-			margin: 10px;
-			border: none;
-			cursor: pointer;
-			font-size: 14px;
-			font-weight: 500;
-			&:hover {
-				background-color: #424242;
+	
+	}
+}
+
+@media screen and (max-width: 800px){
+	.cookie{
+		width: 95%;
+		height: 200px;
+
+		&--header{
+			h2{
+				font-size: 16px;
+			}
+		}
+
+		&--body{
+			p{
+				font-size: 12px;
 			}
 		}
 	}

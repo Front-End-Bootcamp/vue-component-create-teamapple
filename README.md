@@ -1,6 +1,7 @@
 # Vue - Notification Project
 
-![Video_2022_10_15-3 (1)](https://user-images.githubusercontent.com/72731296/195981401-c4718528-f08f-48e7-a176-d630d3ba9b7a.gif)
+![bandicam-2022-10-17-15-17-04-425](https://user-images.githubusercontent.com/72731296/196175476-4c88b5cb-31f6-499b-86ee-95abb0fe2ed2.gif)
+
 
 ## Usage
 
@@ -8,7 +9,6 @@
 import { ref } from "vue";
 import NotificationsList from "./components/Notification/NotificationList.vue";
 import { toast } from "./components/Notification/Toastify.js";
-
 ```
 
 ```bash
@@ -72,6 +72,51 @@ notifications.value.push(toast().info())
 | duration               | Number  | 10000                                      |
 | background             | String  | 'black'                                    |
 | barBackground          | String  | 'gray'                                     |
-| barActive              | Boolen  | true                                       |
+| barActive              | Boolean  | true                                       |
 | color                  | String  | 'white'                                    |
+
+<br/>
+
+# Vue - Cookie Project
+
+![bandicam-2022-10-17-14-12-08-137](https://user-images.githubusercontent.com/72731296/196166328-e9188556-16fa-498b-9a7a-bc9e8479983c.gif)
+
+
+## Usage
+
+```bash
+import { ref } from "vue";
+import Cookie from "./components/Cookie/Cookie.vue";
+```
+
+```bash
+const cookieData = ref({
+		title: "Default Title",
+		description: "Description Here ",
+		rejectActive: true,
+		privacyPolicy : "Privacy Policy Here"
+		cookieSettings : [
+			{
+				title : "Cookie Settings",
+				description : "Cookie Settings Description",
+				isActive : false,
+			},
+		],
+	});
+```
+```bash
+<template>
+	<div>
+		<Cookie :cookieData="cookieData" ></Cookie>
+	</div>
+</template>
+```
+
+| Prop                   | Type    |	Default                                   |
+| ---------------------- | ------- | ------------------------------------------ |
+| title                  | String  | 'Default Title   '                           |
+| description            | String  | 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'                                |
+| rejectActive           | Boolean  | true                                    |
+| privacyPolicy          | String  | 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'                                    |
+| cookieSettings         | Object  | title : "Default Title" , description = "Default Description" , isActive=false                                 |
 
