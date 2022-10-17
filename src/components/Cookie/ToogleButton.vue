@@ -116,4 +116,30 @@ import { ref, toRefs } from 'vue';
 	}
 }
 
+@media screen and (max-width: 768px){
+	.toggle{
+		&--button{
+			width: 60px;
+			height: 30px;
+		}
+		&--knobs{
+			&::before , &::after, &>span{
+				width: 18px;
+				height: 8px;
+				font-size: 8px;
+				padding: 7px 3px;
+			}
+			&::before{
+				left: 3px;
+			}
+		}
+		&--checkbox{
+			&:checked + .toggle--knobs::before{
+				left: 32px;
+			}
+		}
+
+	}
+}
+
 </style>

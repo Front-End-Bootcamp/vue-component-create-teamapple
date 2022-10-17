@@ -30,4 +30,12 @@ const isDeclineActive = computed(() => {
 				background-color: #424242;
 			}
 		}
+
+		@media screen and (max-width: 800px) {
+			.cookie--button{
+				padding: 5px;
+				font-size: 12px;
+			}
+		}
+
 </style>

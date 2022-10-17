@@ -1,5 +1,5 @@
 <script setup>
-	import { ref ,computed, reactive, toRefs} from "vue";
+	import {computed, reactive} from "vue";
 	import CookieSettings from "./CookieSettings.vue";
 	import ButtonComp from "./Button.vue";
 	import {setCookie,getCookie} from "./CookieFunc.js";
@@ -19,33 +19,31 @@
 	const {description=defaultDesc} = (props.cookieData);
 	const {rejectActive} = (props.cookieData);
 	const {cookieSettings} = (props.cookieData);
-	const {privacy} = (props.cookieData);
+	const {privacyPolicy} = (props.cookieData);
 
 
 	const cookieActive = computed( () => {
 		return getCookie("cookieShow") === "false" ? false : true;
 	})
 
-	const showComp = reactive({
+	const isActive = reactive({
 		cookie: cookieActive.value,
 		settings: false
 	})
 
 	const acceptHandler = () => {
-		showComp.cookie = false
-		// localStorage.setItem("cookie",JSON.stringify(false))
-		setCookie("cookieShow",false,1)
+		isActive.cookie = false
+		setCookie("cookieShow",false,10) // 10 minute to clear cookie
 	};
 
 	const declineHandler = () => {
-		showComp.cookie = false
-		setCookie("cookieShow",true,1)
-		// localStorage.setItem("cookie",JSON.stringify(true))
+		isActive.cookie = false
+		setCookie("cookieShow",true,10)
 	};
 
 	const settingsHandler = () => {
-		showComp.settings = true
-		showComp.cookie= false
+		isActive.settings = true
+		isActive.cookie= false
 	};
 
 	const buttonData = {
@@ -67,7 +65,7 @@
 </script>
 
 <template>
-	<div v-if="showComp.cookie" class="cookie">
+	<div v-if="isActive.cookie" class="cookie">
 		<div class="cookie--header">
 			<h2>{{title}}</h2>
 		</div>
@@ -78,7 +76,7 @@
 			<ButtonComp v-for="button in buttonData" :button="button" ></ButtonComp>
 		</div>
 	</div>
-	<CookieSettings v-if="showComp.settings" :isShow="showComp" :cookieSettings="cookieSettings" :privacy="privacy" ></CookieSettings>
+	<CookieSettings v-if="isActive.settings" :isShow="isActive" :cookieSettings="cookieSettings" :privacy="privacyPolicy" ></CookieSettings>
 </template>
 
 <style lang="scss" scoped>
@@ -139,6 +137,25 @@
 		border-bottom-left-radius: 20px;
 		border-bottom-right-radius: 20px;
 	
+	}
+}
+
+@media screen and (max-width: 800px){
+	.cookie{
+		width: 95%;
+		height: 200px;
+
+		&--header{
+			h2{
+				font-size: 16px;
+			}
+		}
+
+		&--body{
+			p{
+				font-size: 12px;
+			}
+		}
 	}
 }
 

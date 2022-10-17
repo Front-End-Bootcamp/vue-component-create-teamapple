@@ -40,4 +40,15 @@ const props = defineProps(["cookieSetting"])
 					font-weight: 500;
 				}
 			}
+			@media screen and (max-width: 800px) {
+				.settings--item{
+					&__title{
+						font-size: 14px;
+					}
+					&__descr{
+						font-size: 12px;
+					}
+				}
+			}
+
 </style>

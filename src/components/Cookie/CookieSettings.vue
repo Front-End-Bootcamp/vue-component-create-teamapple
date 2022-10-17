@@ -40,21 +40,17 @@ const selectData = ref([
 	},
 ])
 
+const selectHandler = () => {
+	selectData.value.forEach((item) => {
+		if (item.name === selected.value) return item.isActive = true
+		item.isActive = false
+	})
+}
+
 const closeHandler = () => {
 	cookie.value = true;
 	settings.value = false;
 };
-
-const selectHandler = () => {
-	selectData.value.forEach((item) => {
-		if(item.name === selected.value){
-			item.isActive = true
-		}else{
-			item.isActive = false
-		}
-	})
-}
-
 
 const saveHandler = () => {
 	cookie.value = true;
@@ -87,7 +83,7 @@ const saveHandler = () => {
 				<CookieSettingsItem v-for="item in cookieSettings" :cookieSetting="item" ></CookieSettingsItem>
 			</template>
 			<template v-else>
-				<CookieModal  v-for="item in selectData" :item="item" > </CookieModal>
+				<CookieModal v-for="item in selectData" :item="item" > </CookieModal>
 			</template>
 		</div>
 		<div class="settings--footer">
@@ -142,7 +138,6 @@ const saveHandler = () => {
 				margin-right: 10px;
 				cursor: pointer;
 			}
-
 		}
 
 		&--select{
@@ -157,7 +152,6 @@ const saveHandler = () => {
 			padding: 0 10px;
 			outline: none;
 			cursor: pointer;
-
  		}
 
 		&--content{
@@ -166,7 +160,6 @@ const saveHandler = () => {
 			display: flex;
 			flex-direction: column;
 			color: white;
-		
 		}
 
 		&--footer{
@@ -193,8 +186,60 @@ const saveHandler = () => {
 				}
 			}
 		}
-
 	}
-
+	@media screen and (max-width: 950px){
+		.settings{
+			width: 60%;
+			height: 60%;
+		}
+	}
+	@media screen and (max-width: 768px){
+		.settings{
+			width: 80%;
+			height: 60%;
+			&--header{
+				&__title{
+					&>h2{
+						font-size: 16px;
+					}
+				}
+			}
+			&--select{
+				width: 150px;
+				height: 30px;
+				font-size: 14px;
+			}
+			&--footer{
+				&--button{
+					font-size: 12px;
+					padding: 5px 10px;
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 480px){
+		.settings{
+			width: 90%;
+			height: 70%;
+			&--header{
+				&__title{
+					&>h2{
+						font-size: 14px;
+					}
+				}
+			}
+			&--select{
+				width: 150px;
+				height: 40px;
+				font-size: 12px;
+			}
+			&--footer{
+				&--button{
+					font-size: 12px;
+					padding: 10px 10px;
+				}
+			}
+		}
+	}
 
 </style>
