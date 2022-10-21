@@ -16,10 +16,10 @@ const clickHandler = () => {
 
 <template>
 	<div class="notifications" :class="props.notifications[0]?.class.position">
-		<template v-for="notification in props.notifications" :key="notification">
+		<template v-for="notification in props.notifications" :key="notification.id">
 			<Notification
-				v-model:id="remove"
-				v-if="notification.show"
+			v-if="notification.show" 
+			v-model:id="remove"
 				:notification="notification"
 				@click="clickHandler"
 			>

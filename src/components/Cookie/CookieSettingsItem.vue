@@ -20,7 +20,6 @@ const props = defineProps(["cookieSetting"])
 
 <style lang="scss" scoped>
 	.settings--item{
-				width: 100%;
 				border: 2px solid #121212;
 				margin: 5px 0px;
 				padding: 10px;

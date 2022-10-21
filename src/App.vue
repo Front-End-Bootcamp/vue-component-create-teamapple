@@ -119,6 +119,21 @@ const clickHandler = () => {
 		})
 	);
 };
+
+const successHandler = () => {
+	notifications.value.push(
+		toast().success())
+};
+
+const errorHandler = () => {
+	notifications.value.push(
+		toast().error())
+};
+
+const warningHandler = () => {
+	notifications.value.push(
+		toast().warning())
+};
 </script>
 
 <template>
@@ -129,6 +144,13 @@ const clickHandler = () => {
 		<button class="showButton" @click="isTextOpen">Show Text Popup</button>
 		<button class="showButton" @click="clickHandler">
 			Show Custom Notification
+		</button>
+		<button class="showButton" @click="successHandler">
+			Show Success Notification
+		</button>		<button class="showButton" @click="errorHandler">
+			Show Error Notification
+		</button>		<button class="showButton" @click="warningHandler">
+			Show Warning Notification
 		</button>
 	</div>
 
@@ -158,6 +180,7 @@ const clickHandler = () => {
 			></Popup>
 		</Teleport>
 	</template>
+
 	<Teleport to="#notification">
 		<NotificationsList :notifications="notifications"></NotificationsList>
 	</Teleport>
@@ -166,8 +189,9 @@ const clickHandler = () => {
 <style lang="scss" scoped>
 .btnGroups {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 10px;
+	left: 10px;
+
 }
 .showButton {
 	border-radius: 8px;
@@ -177,6 +201,7 @@ const clickHandler = () => {
 	font-weight: 500;
 	font-family: inherit;
 	background-color: #1a1a1a;
+	margin: 5px;
 	cursor: pointer;
 	transition: border-color 0.25s;
 

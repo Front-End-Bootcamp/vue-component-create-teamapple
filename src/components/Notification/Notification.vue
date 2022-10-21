@@ -31,8 +31,8 @@ onMounted(() => {
 	}, props.notification.duration);
 	startTimer(props.notification.duration);
 });
-</script>
 
+</script>
 <template>
 	<template v-if="isClose">
 		<div class="notification--message" :class="position" :style="{backgroundColor : backgroundColor}" >

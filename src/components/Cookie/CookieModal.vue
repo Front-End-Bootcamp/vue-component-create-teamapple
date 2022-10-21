@@ -17,7 +17,6 @@ const {text = "Lorem ipsum dolor sit amet consectetur adipisicing elit."} = (pro
 
 <style lang="scss" scoped>
 	.item{
-				width: 100%;
 				margin: 5px 0px;
 				padding: 10px;
 				display: flex;
