@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Notification from "./Notification.vue";
 
 const props = defineProps(["notifications"]);
-const remove = ref(null);
+const remove = ref(null);  //
 
 const clickHandler = () => {
 	props.notifications.forEach((element) => {

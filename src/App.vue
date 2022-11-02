@@ -81,7 +81,7 @@ const cookieSettingsData = [
 	{
 		title: "Cookie Ayarları",
 		description: "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
-		isActive: false,
+		isActive: true,
 	},
 	{
 		title: "Cookie Ayarları",
@@ -93,6 +93,7 @@ const cookieSettingsData = [
 		description: "Cookie ayarlarınızı buradan değiştirebilirsiniz.",
 		isActive: false,
 	},
+	
 ];
 
 const cookieData = ref({
@@ -112,6 +113,7 @@ const clickHandler = () => {
 	notifications.value.push(
 		toast("This is a test notification", {
 			icon: "🤞",
+			position : "bottom-right",
 			duration: 5000,
 			background: "#f0f0f0",
 			color: "#212121",
@@ -122,7 +124,9 @@ const clickHandler = () => {
 
 const successHandler = () => {
 	notifications.value.push(
-		toast().success())
+		toast().success("Vue.js Bootcamp",{
+			background : "red",
+		}))
 };
 
 const errorHandler = () => {
